@@ -88,6 +88,13 @@ scripts to install the packages and files necessary to deploy the Apache web ser
     "WebsiteURL" : {
       "Description" : "URL for newly created LAMP stack",
       "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "WebServerInstance", "PublicDnsName" ]}]] }
-    }
+    },
+    "PublicIP" : {
+      "Description" : "IP Address of the instance",
+      "value" : {
+        "Fn::GetAtt": [
+          "WebServerInstance",
+          "PublicIp"
+          ]
   }
 }
