@@ -187,7 +187,7 @@
 				"SecurityGroups": [{
 					"Ref": "WebServerSecurityGroup"
 				}],
-				"KeyName": "MyOwnKey",
+				"KeyName": "JS",
 				"UserData": {
 					"Fn::Base64": {
 						"Fn::Join": ["", [
