@@ -96,5 +96,6 @@ scripts to install the packages and files necessary to deploy the Apache web ser
           "WebServerInstance",
           "PublicIp"
           ]
+      }
   }
 }
