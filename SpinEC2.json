@@ -191,7 +191,7 @@
 							"yum update -y\n",
 							"yum install -y httpd\n",
 							"yum install -y php  php-mysqlnd\n",
-							"cp test.php insert.php /var/www/html\n"
+							"cp test.php insert.php /var/www/html\n",
 							"echo HelloWorld >> /var/www/html/index.html\n",
 							"service httpd start\n"							
 						]]
