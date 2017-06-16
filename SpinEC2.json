@@ -1,99 +1,239 @@
 {
-  "AWSTemplateFormatVersion" : "2010-09-09",
+	"AWSTemplateFormatVersion": "2010-09-09",
 
-  "Description" : "AWS CloudFormation sample template LAMP_Single_Instance: Create a LAMP stack using a single EC2 instance and a local MySQL database for storage. This template demonstrates using the AWS CloudFormation bootstrap scripts to install the packages and files necessary to deploy the Apache web server, PHP, and MySQL at instance launch time. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.",
+	"Description": "AWS CloudFormation sample template LAMP_Single_Instance: Create a LAMP stack using a single EC2 instance and a local MySQL database for storage. This template demonstrates using the AWS CloudFormation bootstrap scripts to install the packages and files necessary to deploy the Apache web server, PHP, and MySQL at instance launch time. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.",
 
-   "Mappings" : {
-    "AWSInstanceType2Arch" : {
-      "t1.micro"    : { "Arch" : "PV64"   },
-      "t2.micro"    : { "Arch" : "HVM64"  },
-      "t2.small"    : { "Arch" : "HVM64"  },
-      "t2.medium"   : { "Arch" : "HVM64"  },
-      "m1.small"    : { "Arch" : "PV64"   },
-      "m1.medium"   : { "Arch" : "PV64"   },
-      "m1.large"    : { "Arch" : "PV64"   },
-      "m1.xlarge"   : { "Arch" : "PV64"   },
-      "m2.xlarge"   : { "Arch" : "PV64"   },
-      "m2.2xlarge"  : { "Arch" : "PV64"   },
-      "m2.4xlarge"  : { "Arch" : "PV64"   },
-      "m3.medium"   : { "Arch" : "HVM64"  },
-      "m3.large"    : { "Arch" : "HVM64"  },
-      "m3.xlarge"   : { "Arch" : "HVM64"  },
-      "m3.2xlarge"  : { "Arch" : "HVM64"  },
-      "c1.medium"   : { "Arch" : "PV64"   },
-      "c1.xlarge"   : { "Arch" : "PV64"   },
-      "c3.large"    : { "Arch" : "HVM64"  },
-      "c3.xlarge"   : { "Arch" : "HVM64"  },
-      "c3.2xlarge"  : { "Arch" : "HVM64"  },
-      "c3.4xlarge"  : { "Arch" : "HVM64"  },
-      "c3.8xlarge"  : { "Arch" : "HVM64"  },
-      "g2.2xlarge"  : { "Arch" : "HVMG2"  },
-      "r3.large"    : { "Arch" : "HVM64"  },
-      "r3.xlarge"   : { "Arch" : "HVM64"  },
-      "r3.2xlarge"  : { "Arch" : "HVM64"  },
-      "r3.4xlarge"  : { "Arch" : "HVM64"  },
-      "r3.8xlarge"  : { "Arch" : "HVM64"  },
-      "i2.xlarge"   : { "Arch" : "HVM64"  },
-      "i2.2xlarge"  : { "Arch" : "HVM64"  },
-      "i2.4xlarge"  : { "Arch" : "HVM64"  },
-      "i2.8xlarge"  : { "Arch" : "HVM64"  },
-      "hi1.4xlarge" : { "Arch" : "HVM64"  },
-      "hs1.8xlarge" : { "Arch" : "HVM64"  },
-      "cr1.8xlarge" : { "Arch" : "HVM64"  },
-      "cc2.8xlarge" : { "Arch" : "HVM64"  }
-    },
+	"Mappings": {
+		"AWSInstanceType2Arch": {
+			"t1.micro": {
+				"Arch": "PV64"
+			},
+			"t2.micro": {
+				"Arch": "HVM64"
+			},
+			"t2.small": {
+				"Arch": "HVM64"
+			},
+			"t2.medium": {
+				"Arch": "HVM64"
+			},
+			"m1.small": {
+				"Arch": "PV64"
+			},
+			"m1.medium": {
+				"Arch": "PV64"
+			},
+			"m1.large": {
+				"Arch": "PV64"
+			},
+			"m1.xlarge": {
+				"Arch": "PV64"
+			},
+			"m2.xlarge": {
+				"Arch": "PV64"
+			},
+			"m2.2xlarge": {
+				"Arch": "PV64"
+			},
+			"m2.4xlarge": {
+				"Arch": "PV64"
+			},
+			"m3.medium": {
+				"Arch": "HVM64"
+			},
+			"m3.large": {
+				"Arch": "HVM64"
+			},
+			"m3.xlarge": {
+				"Arch": "HVM64"
+			},
+			"m3.2xlarge": {
+				"Arch": "HVM64"
+			},
+			"c1.medium": {
+				"Arch": "PV64"
+			},
+			"c1.xlarge": {
+				"Arch": "PV64"
+			},
+			"c3.large": {
+				"Arch": "HVM64"
+			},
+			"c3.xlarge": {
+				"Arch": "HVM64"
+			},
+			"c3.2xlarge": {
+				"Arch": "HVM64"
+			},
+			"c3.4xlarge": {
+				"Arch": "HVM64"
+			},
+			"c3.8xlarge": {
+				"Arch": "HVM64"
+			},
+			"g2.2xlarge": {
+				"Arch": "HVMG2"
+			},
+			"r3.large": {
+				"Arch": "HVM64"
+			},
+			"r3.xlarge": {
+				"Arch": "HVM64"
+			},
+			"r3.2xlarge": {
+				"Arch": "HVM64"
+			},
+			"r3.4xlarge": {
+				"Arch": "HVM64"
+			},
+			"r3.8xlarge": {
+				"Arch": "HVM64"
+			},
+			"i2.xlarge": {
+				"Arch": "HVM64"
+			},
+			"i2.2xlarge": {
+				"Arch": "HVM64"
+			},
+			"i2.4xlarge": {
+				"Arch": "HVM64"
+			},
+			"i2.8xlarge": {
+				"Arch": "HVM64"
+			},
+			"hi1.4xlarge": {
+				"Arch": "HVM64"
+			},
+			"hs1.8xlarge": {
+				"Arch": "HVM64"
+			},
+			"cr1.8xlarge": {
+				"Arch": "HVM64"
+			},
+			"cc2.8xlarge": {
+				"Arch": "HVM64"
+			}
+		},
 
-    "AWSRegionArch2AMI" : {
-      "us-east-1"      : { "PV64" : "ami-50842d38", "HVM64" : "ami-08842d60", "HVMG2" : "ami-3a329952"  },
-      "us-west-2"      : { "PV64" : "ami-af86c69f", "HVM64" : "ami-8786c6b7", "HVMG2" : "ami-47296a77"  },
-      "us-west-1"      : { "PV64" : "ami-c7a8a182", "HVM64" : "ami-cfa8a18a", "HVMG2" : "ami-331b1376"  },
-      "eu-west-1"      : { "PV64" : "ami-aa8f28dd", "HVM64" : "ami-748e2903", "HVMG2" : "ami-00913777"  },
-      "ap-southeast-1" : { "PV64" : "ami-20e1c572", "HVM64" : "ami-d6e1c584", "HVMG2" : "ami-fabe9aa8"  },
-      "ap-northeast-1" : { "PV64" : "ami-21072820", "HVM64" : "ami-35072834", "HVMG2" : "ami-5dd1ff5c"  },
-      "ap-southeast-2" : { "PV64" : "ami-8b4724b1", "HVM64" : "ami-fd4724c7", "HVMG2" : "ami-e98ae9d3"  },
-      "sa-east-1"      : { "PV64" : "ami-9d6cc680", "HVM64" : "ami-956cc688", "HVMG2" : "NOT_SUPPORTED" },
-      "cn-north-1"     : { "PV64" : "ami-a857c591", "HVM64" : "ami-ac57c595", "HVMG2" : "NOT_SUPPORTED" },
-      "eu-central-1"   : { "PV64" : "ami-a03503bd", "HVM64" : "ami-b43503a9", "HVMG2" : "ami-b03503ad"  }
-    }
-  },
+		"AWSRegionArch2AMI": {
+			"us-east-1": {
+				"PV64": "ami-50842d38",
+				"HVM64": "ami-08842d60",
+				"HVMG2": "ami-3a329952"
+			},
+			"us-west-2": {
+				"PV64": "ami-af86c69f",
+				"HVM64": "ami-8786c6b7",
+				"HVMG2": "ami-47296a77"
+			},
+			"us-west-1": {
+				"PV64": "ami-c7a8a182",
+				"HVM64": "ami-cfa8a18a",
+				"HVMG2": "ami-331b1376"
+			},
+			"eu-west-1": {
+				"PV64": "ami-aa8f28dd",
+				"HVM64": "ami-748e2903",
+				"HVMG2": "ami-00913777"
+			},
+			"ap-southeast-1": {
+				"PV64": "ami-20e1c572",
+				"HVM64": "ami-d6e1c584",
+				"HVMG2": "ami-fabe9aa8"
+			},
+			"ap-northeast-1": {
+				"PV64": "ami-21072820",
+				"HVM64": "ami-35072834",
+				"HVMG2": "ami-5dd1ff5c"
+			},
+			"ap-southeast-2": {
+				"PV64": "ami-8b4724b1",
+				"HVM64": "ami-fd4724c7",
+				"HVMG2": "ami-e98ae9d3"
+			},
+			"sa-east-1": {
+				"PV64": "ami-9d6cc680",
+				"HVM64": "ami-956cc688",
+				"HVMG2": "NOT_SUPPORTED"
+			},
+			"cn-north-1": {
+				"PV64": "ami-a857c591",
+				"HVM64": "ami-ac57c595",
+				"HVMG2": "NOT_SUPPORTED"
+			},
+			"eu-central-1": {
+				"PV64": "ami-a03503bd",
+				"HVM64": "ami-b43503a9",
+				"HVMG2": "ami-b03503ad"
+			}
+		}
+	},
 
-  "Resources" : {
+	"Resources": {
 
-    "WebServerInstance": {
-      "Type": "AWS::EC2::Instance",
-      "Properties": {
-        "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
-                    { "Fn::FindInMap" : [ "AWSInstanceType2Arch", m1.medium, "Arch" ] } ] },
-        "InstanceType"   : m1.medium,
-        "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
-        "KeyName"        : MyOwnKey,
-	"UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
-             "#!/bin/sh \n",
-             "yum update -y httpd\n",
-			 "echo HelloWorld >> /var/www/html/index.html"
-        ]]}}
-    }
-    },
-    "WebServerSecurityGroup" : {
-      "Type" : "AWS::EC2::SecurityGroup",
-      "Properties" : {
-        "GroupDescription" : "Enable HTTP access via port 80",
-        "SecurityGroupIngress" : [
-          {"IpProtocol" : "tcp", "FromPort" : "80", "ToPort" : "80", "CidrIp" : "0.0.0.0/0"},
-          {"IpProtocol" : "tcp", "FromPort" : "22", "ToPort" : "22", "CidrIp" : "0.0.0.0/0"}
-        ]
-      }
-    }
-  },
+		"WebServerInstance": {
+			"Type": "AWS::EC2::Instance",
+			"Properties": {
+				"ImageId": {
+					"Fn::FindInMap": ["AWSRegionArch2AMI", {
+							"Ref": "AWS::Region"
+						},
+						{
+							"Fn::FindInMap": ["AWSInstanceType2Arch", "m1.medium", "Arch"]
+						}
+					]
+				},
+				"InstanceType": "m1.medium",
+				"SecurityGroups": [{
+					"Ref": "WebServerSecurityGroup"
+				}],
+				"KeyName": "MyOwnKey",
+				"UserData": {
+					"Fn::Base64": {
+						"Fn::Join": ["", [
+							"#!/bin/sh \n",
+							"yum update -y httpd\n",
+							"echo HelloWorld >> /var/www/html/index.html"
+						]]
+					}
+				}
+			}
+		},
+		"WebServerSecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "Enable HTTP access via port 80",
+				"SecurityGroupIngress": [{
+						"IpProtocol": "tcp",
+						"FromPort": "80",
+						"ToPort": "80",
+						"CidrIp": "0.0.0.0/0"
+					},
+					{
+						"IpProtocol": "tcp",
+						"FromPort": "22",
+						"ToPort": "22",
+						"CidrIp": "0.0.0.0/0"
+					}
+				]
+			}
+		}
+	},
 
-  "Outputs" : {
-    "PublicIP" : {
-      "Description" : "public ip",
-      "Value" : { "Fn::GetAtt" : ["WebServerInstance", "PublicIp"] }
-    },
-    "WebsiteURL" : {
-      "Description" : "URL for newly created LAMP stack",
-      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "WebServerInstance", "PublicDnsName" ]}]] }
-    }
-  }
+	"Outputs": {
+		"PublicIP": {
+			"Description": "public ip",
+			"Value": {
+				"Fn::GetAtt": ["WebServerInstance", "PublicIp"]
+			}
+		},
+		"WebsiteURL": {
+			"Description": "URL for newly created LAMP stack",
+			"Value": {
+				"Fn::Join": ["", ["http://", {
+					"Fn::GetAtt": ["WebServerInstance", "PublicDnsName"]
+				}]]
+			}
+		}
+	}
 }
