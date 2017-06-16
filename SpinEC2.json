@@ -1,10 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "AWS CloudFormation sample template LAMP_Single_Instance: Create a LAMP stack using a single EC2
-instance and a local MySQL database for storage. This template demonstrates using the AWS CloudFormation bootstrap
-scripts to install the packages and files necessary to deploy the Apache web server, PHP, and MySQL at instance launch time.
-**WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.",
+  "Description" : "AWS CloudFormation sample template LAMP_Single_Instance: Create a LAMP stack using a single EC2 instance and a local MySQL database for storage. This template demonstrates using the AWS CloudFormation bootstrap scripts to install the packages and files necessary to deploy the Apache web server, PHP, and MySQL at instance launch time. **WARNING** This template creates an Amazon EC2 instance. You will be billed for the AWS resources used if you create a stack from this template.",
 
    "Mappings" : {
     "AWSInstanceType2Arch" : {
@@ -66,16 +63,16 @@ scripts to install the packages and files necessary to deploy the Apache web ser
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
-                          { "Fn::FindInMap" : [ "AWSInstanceType2Arch", m1.medium, "Arch" ] } ] },
+                    { "Fn::FindInMap" : [ "AWSInstanceType2Arch", m1.medium, "Arch" ] } ] },
         "InstanceType"   : m1.medium,
         "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
         "KeyName"        : MyOwnKey
-	"UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
-             "#!/bin/bash \n",
+		"UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
+             "#!/bin/sh \n",
              "yum update -y httpd\n",
-			 "echo 'Hello World!!' >> /var/www/html/index.html"]]}
-	}
-      }
+			 "echo HelloWorld >> /var/www/html/index.html"
+        ]]}}
+    }
     },
     "WebServerSecurityGroup" : {
       "Type" : "AWS::EC2::SecurityGroup",
