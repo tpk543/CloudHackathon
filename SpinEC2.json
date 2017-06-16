@@ -66,7 +66,7 @@
                     { "Fn::FindInMap" : [ "AWSInstanceType2Arch", m1.medium, "Arch" ] } ] },
         "InstanceType"   : m1.medium,
         "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
-        "KeyName"        : MyOwnKey
+        "KeyName"        : MyOwnKey,
 	"UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
              "#!/bin/sh \n",
              "yum update -y httpd\n",
