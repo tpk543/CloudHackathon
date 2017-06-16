@@ -96,3 +96,51 @@ done
 echo "`date` ${AMI_ID} AMI has been created successfully and it is in available state"
 
 echo "AMI_ID=$AMI_ID" >> user.properties
+
+
+
+
+
+#############################################################################################
+ASGBLueGreenDeploy:
+Job4:
+#############################################################################################
+
+#!/bin/bash
+
+# Parameters required to trigger the AWS CloudFormation Stack
+export ASGStackName="$ASGSTACKNAME"
+export InstanceType="m1.small"
+export NEWAMI="$AMI_ID"
+export OperatorEMail="venkatesh4ganta@gmail.com"
+export KeyName="veganta"
+export Templatefile="file://ASGTemplate.json"
+
+## Command to sync the latest cloudformation template
+
+aws s3 cp s3://templatebucket99/ASGTemplate.json .
+
+### AWS CLI Command to trigger the CloudFormation and run the Instances undera Dynamic Load Balancer
+
+aws cloudformation describe-stacks --stack-name ${ASGStackName}
+
+if [ $? -eq 0 ]; then
+
+Updatestate=aws cloudformation update-stack --stack-name "${ASGStackName}" --template-body "${Templatefile}" --parameters ParameterKey=InstanceType,ParameterValue="${InstanceType}" ParameterKey=NEWAMI,ParameterValue="${NEWAMI}" ParameterKey=OperatorEMail,ParameterValue="${OperatorEMail}" ParameterKey=KeyName,ParameterValue="${KeyName}"
+if [ $? -eq 0 ]; then
+echo " Cloud Formation executed Succesfully"
+else
+echo " Failed to execute the CloudFormation stack"
+exit 1
+fi
+
+else
+aws cloudformation create-stack --stack-name "${ASGStackName}" --template-body "${Templatefile}" --parameters ParameterKey=InstanceType,ParameterValue="${InstanceType}" ParameterKey=NEWAMI,ParameterValue="${NEWAMI}" ParameterKey=OperatorEMail,ParameterValue="${OperatorEMail}" ParameterKey=KeyName,ParameterValue="${KeyName}"
+
+if [ $? -eq 0 ]; then
+echo " Cloud Formation executed Succesfully"
+else
+echo " Failed to execute the CloudFormation stack"
+exit 1
+fi
+fi
