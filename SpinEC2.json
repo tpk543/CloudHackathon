@@ -192,7 +192,7 @@
 							"yum install -y httpd\n",
 							"service httpd start\n",
 							"echo HelloWorld >> /var/www/html/index.html\n",
-							"yum install -y php70  php70-mysqlnd\n",
+							"yum install -y php  php-mysqlnd\n",
 							"cp test.php insert.php /var/www/html"
 						]]
 					}
