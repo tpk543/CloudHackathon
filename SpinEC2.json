@@ -70,6 +70,11 @@ scripts to install the packages and files necessary to deploy the Apache web ser
         "InstanceType"   : m1.medium,
         "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
         "KeyName"        : MyOwnKey
+		"UserData"       : { "Fn::Base64" : { "Fn::Join" : ["", [
+             "#!/bin/bash \n",
+             "yum update -y httpd\n",
+			 "echo 'Hello World!!' >> /var/www/html/index.html"]]}
+		}
       }
     },
     "WebServerSecurityGroup" : {
