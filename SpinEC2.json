@@ -191,6 +191,7 @@
 							"yum update -y\n",
 							"yum install -y httpd\n",
 							"yum install -y php  php-mysqlnd\n",
+							"yum install -y git\n",
 							"cd /tmp\n",
 							"git clone https://github.com/tpk543/CloudHackathon.git\n",
 							"cp CloudHackathon/test.php CloudHackathon/insert.php /var/www/html\n",
