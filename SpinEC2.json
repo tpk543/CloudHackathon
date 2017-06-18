@@ -196,7 +196,8 @@
 							"git clone https://github.com/tpk543/CloudHackathon.git\n",
 							"cp CloudHackathon/test.php CloudHackathon/insert.php /var/www/html\n",
 							"echo HelloWorld >> /var/www/html/index.html\n",
-							"service httpd start\n"							
+							"service httpd start\n",
+							"chkconfig httpd on"
 						]]
 					}
 				}
